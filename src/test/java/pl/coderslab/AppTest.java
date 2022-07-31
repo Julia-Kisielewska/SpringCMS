@@ -1,4 +1,4 @@
-package org.example;
+package pl.coderslab;
 
 import static org.junit.Assert.assertTrue;
 
