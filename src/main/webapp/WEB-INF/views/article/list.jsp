@@ -26,6 +26,8 @@
         </tr>
     </c:forEach>
 </table>
+<a href="<c:url value="/article/author/list"/>">Autorzy</a>
+<a href="<c:url value="/article/category/list"/>">Kategorie</a>
 </body>
 </body>
 </html>
