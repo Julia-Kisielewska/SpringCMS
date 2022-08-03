@@ -21,12 +21,12 @@ public class Article {
     private String title;
     //(max. 200 znaków)
 
-    @OneToOne
+    @ManyToOne
     private Author author;
     //    (powiązanie relacją do klasy Author)
     //    artykuł może mieć tylko jednego autora
 
-    @OneToMany
+    @OneToMany (fetch = FetchType.EAGER)
     private List<Category> categories;
     //    (powiązanie relacją do klasy Category)
     //    artykuł może należeć do wielu kategorii

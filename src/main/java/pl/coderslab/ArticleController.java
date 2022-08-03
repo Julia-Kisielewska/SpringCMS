@@ -25,11 +25,6 @@ public class ArticleController {
         return this.categoryDao.findAll();
     }
 
-    //    @RequestMapping("/hello")
-//    @ResponseBody
-//    public String start() {
-//        return "";
-//    }
     @GetMapping("/list")
     public String list(Model model) {
         model.addAttribute("articles", articleDao.findAll());
@@ -99,15 +94,34 @@ public class ArticleController {
 //        return "dodano";
 //    }
 
-    @ResponseBody
-    @RequestMapping("/delete")
-    public String deleteArticle() {
-        return "usunięto";
+    @GetMapping("/edit")
+    public String edit(Model model, @RequestParam(name = "id") String id) {
+        long idVal = Long.parseLong(id);
+        Article article = articleDao.findById(idVal);
+        model.addAttribute("article", article);
+        model.addAttribute("authors", authorDao.findAll());
+        model.addAttribute("categories", categoryDao.findAll());
+        return "article/edit";
     }
 
-    @ResponseBody
-    @RequestMapping("/update")
-    public String updateArticle() {
-        return "zaktualizowano";
+    @PostMapping("/edit")
+    public String edit(Article article, Model model) {
+        articleDao.update(article);
+        return "redirect:/article/list";
+    }
+    @GetMapping("/delete")
+    public String delete(@RequestParam(name = "id") String id, Model model) {
+        long idVal = Long.parseLong(id);
+        Article article = articleDao.findById(idVal);
+        model.addAttribute("article", article);
+        model.addAttribute("authors", authorDao.findAll());
+        model.addAttribute("categories", categoryDao.findAll());
+        return "/article/delete";
+    }
+
+    @PostMapping("/delete")
+    public String delete(Article article, Model model){
+        articleDao.delete(article);
+        return "redirect:/article/list";
     }
 }

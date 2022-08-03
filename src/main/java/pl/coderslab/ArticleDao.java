@@ -37,4 +37,7 @@ public class ArticleDao {
         List resultList = query.setMaxResults(5).getResultList();
         return resultList;
     }
+    public Article findById(Long id) {
+        return entityManager.find(Article.class, id);
+    }
 }
